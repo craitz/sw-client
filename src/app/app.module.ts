@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import {CharactersPageComponent} from './characters-page/characters-page.component';
 import {StatisticsPageComponent} from './statistics-page/statistics-page.component';
 
+import { StarWarsService } from '../app/star-wars.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +21,7 @@ import {StatisticsPageComponent} from './statistics-page/statistics-page.compone
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [StarWarsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
