@@ -1,0 +1,26 @@
+<div class="characters-content">
+    <div *ngIf="characters !== null" class="table-responsive-lg">
+      <table class="table">
+          <thead>
+              <tr>
+                  <th scope="col">Nome</th>
+                  <th scope="col">Altura</th>
+                  <th scope="col">Sexo</th>
+                  <th scope="col">Ano de nascimento</th>
+                  <th scope="col">Planeta natal</th>
+                  <th scope="col">Espécie</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr *ngFor="let character of characters.results">
+                      <td scope="col">{{character.name}}</td>
+                      <td scope="col">{{character.height}}</td>
+                      <td scope="col">{{character.gender}}</td>
+                      <td scope="col">{{character.birth_year}}</td>
+                      <td scope="col">{{character.homeworld}}</td>
+                      <td scope="col">{{character.species[0]}}</td>
+                  </tr>
+            </tbody>          
+      </table>
+    </div>  
+</div>

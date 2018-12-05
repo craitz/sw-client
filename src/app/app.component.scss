@@ -1,0 +1,26 @@
+.custom-nav {
+    width: 100%;
+    .row {
+        .col {
+            background-color: #454545;
+            .brand-content {
+                height: 100%;
+                min-width: 100 !important;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                margin-left: 16px;
+            }
+            .btn-content {
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                margin-right: 16px;
+                .btn-characters {
+                    margin-right: 10px !important;
+                }
+            }            
+        }
+    }
+}
