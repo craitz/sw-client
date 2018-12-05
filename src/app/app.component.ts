@@ -1,5 +1,5 @@
 import { Component, Injectable } from '@angular/core';
-import {StarWarsService} from './star-wars.service';
+import { StarWarsService } from './services/star-wars/star-wars.service';
 
 
 @Component({
@@ -11,4 +11,8 @@ import {StarWarsService} from './star-wars.service';
 
 export class AppComponent {
   title = 'Star Wars Client';
+
+  constructor(private swService: StarWarsService) {
+    this.swService.init();
+  }
 }

@@ -1,7 +1,7 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CharacterList } from '../models/characterList.model';
-import { StarWarsService } from '../star-wars.service';
+import { StarWarsService } from '../services/star-wars/star-wars.service';
 
 @Component({
   selector: 'app-characters-page',
@@ -13,15 +13,13 @@ import { StarWarsService } from '../star-wars.service';
 export class CharactersPageComponent implements OnInit {
   private characters: CharacterList = null;
 
-  constructor(private http: HttpClient, private swService: StarWarsService) {}
+  constructor(private http: HttpClient, private swService: StarWarsService) { }
 
   ngOnInit() {
     this.getCharacters();
   }
 
   getCharacters() {
-    this.http.get('https://swapi.co/api/people?page=9').subscribe(data => {
-      this.characters = <CharacterList>data;
-    });
+    this.characters = this.swService.characters;
   }
 }

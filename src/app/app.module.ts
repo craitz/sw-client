@@ -5,10 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 
-import {CharactersPageComponent} from './characters-page/characters-page.component';
-import {StatisticsPageComponent} from './statistics-page/statistics-page.component';
+import { CharactersPageComponent } from './characters-page/characters-page.component';
+import { StatisticsPageComponent } from './statistics-page/statistics-page.component';
 
-import { StarWarsService } from '../app/star-wars.service';
+import { StarWarsService } from './services/star-wars/star-wars.service';
 
 @NgModule({
   declarations: [
