@@ -18,4 +18,4 @@ Aplicação Web para chamadas à API Star Wars (SWAPI)
     http://localhost:4200/
 
 ## 5. Acesso ao site na Nuvem
-    http://dfsssdsasdasdsa    
+    http://comexport.s3-website-us-east-1.amazonaws.com/    
