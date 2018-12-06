@@ -2,15 +2,23 @@
     <div class="row">
         <div class="col col-5">
             <div class="brand-content">
-                <!-- <a class="navbar-brand" routerLink="/"> -->
                 <img width="100" alt="Star Wars Logo" src="../assets/images/star-wars.png">
-                <!-- </a> -->
             </div>
         </div>
         <div class="col col-7">
             <div class="btn-content">
-                <button class="btn btn-secondary btn-characters" routerLink="/characters" [disabled]="swService.loading">Personagens</button>
-                <button class="btn btn-secondary btn-statistics" routerLink="/statistics" [disabled]="swService.loading">Filmes</button>
+                <button class="btn btn-secondary btn-characters" routerLink="/" [disabled]="swService.loading">
+                    <span class="fas fa-home"></span>
+                    <span class="btn-text d-none d-sm-inline-block">Home</span>
+                </button>
+                <button class="btn btn-secondary btn-characters" routerLink="/characters" [disabled]="swService.loading">
+                    <span class="fas fa-user"></span>
+                    <span class="btn-text d-none d-sm-inline-block">Personagens</span>
+                </button>
+                <button class="btn btn-secondary btn-statistics" routerLink="/statistics" [disabled]="swService.loading">
+                    <span class="fas fa-film"></span>
+                    <span class="btn-text d-none d-sm-inline-block">Filmes</span>
+                </button>
             </div>
         </div>
     </div>

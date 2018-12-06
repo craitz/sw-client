@@ -1,96 +1,140 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { resolve } from 'url';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StarWarsService {
-  public planets: any = [];
-  public species: any = [];
-  public films: any = [];
-  public characters: any = [];
-  public loading: boolean = false;
-  public charactersContentTsksCount: number = 3;
+  // variáveis da classe
+  public planets = [];
+  public species = [];
+  public films = [];
+  public characters = [];
+  public loading = false;
 
   constructor(private http: HttpClient) { }
 
-  public initCharactersContent() {
-    return new Promise((resolve, reject) => {
+  // Método que inicializa a lista de personagens
+  public async initCharactersContent() {
+    try {
+      // se ainda não foram carregados os personagens
       if (this.characters.length === 0) {
+        // seta flag de carregamento
         this.loading = true;
-        this.getPage('https://swapi.co/api/planets', this.planets);
-        this.getPage('https://swapi.co/api/species', this.species);
-        this.getPage('https://swapi.co/api/people', this.characters);
 
-        setInterval(() => {
-          if (this.charactersContentTsksCount === 0) {
-            this.buildCharacteres();
-            this.loading = false;
-            resolve();
-          }
-        }, 100);
-      } else {
-        resolve();
+        // busca dados necessários na SWAPI
+        await this.getPage('https://swapi.co/api/planets', this.planets);
+        await this.getPage('https://swapi.co/api/species', this.species);
+        await this.getPage('https://swapi.co/api/people', this.characters);
+        
+        // faz o lookup entre coleções para obter 'Planeta natal' e 'Espécie'
+        await this.buildCharacteres();
+
+        // reseta flag de carregamento
+        this.loading = false;
       }
-    });
-  }
-
-  public async initStatisticsContent() {
-    if (this.films.length === 0) {
-      this.loading = true;
-      await this.getPage('https://swapi.co/api/films', this.films);
-      this.loading = false;
+    } catch (err) {
+        // reseta flag de carregamento
+        this.loading = false;
+  
+        // loga o erro
+        console.log(err);
     }
   }
 
+  // Método que inicializa a lista de filmes
+  public async initStatisticsContent() {
+    try {
+      // se ainda não foram carregados os filmes
+      if (this.films.length === 0) {
+        // seta a flag de carregamento
+        this.loading = true;
+        
+        // busca dados necessários na SWAPI
+        await this.getPage('https://swapi.co/api/films', this.films);
+        
+        // reseta a flag de carregamento
+        this.loading = false;
+      }
+    } catch (err) {
+        // reseta a flag de carregamento
+        this.loading = false;
+
+        // loga o erro
+        console.log(err);
+    }
+  }
+
+  // Método que monta a lista com os dados que aparecerão na tabela
   private buildCharacteres() {
     return new Promise((resolve, reject) => {
-      for (let i = 0; i < this.characters.length; i++) {
-        this.characters[i].homeworld = this.getName(this.planets, this.characters[i].homeworld);
-
-        if (this.characters[i].species && this.characters[i].species.length > 0) {
+      try {
+        // persorre o array de personagens
+        for (let i = 0; i < this.characters.length; i++) { 
+          // faz o lookup entre coleções para buscar o nome do planeta natal
+          this.characters[i].homeworld = this.getName(this.planets, this.characters[i].homeworld);
+          
+          // se o array de espécies do personagem não está vazia 
+          if (this.characters[i].species && this.characters[i].species.length > 0) {
+          // faz o lookup entre coleções para buscar o nome despécie
           this.characters[i].species[0] = this.getName(this.species, this.characters[i].species[0]);
+          }
+  
+          // última iteração
+          if ((this.characters.length - 1) === i) {
+            resolve();
+          }
         }
-
-        // última iteração
-        if ((this.characters.length - 1) === i) {
-          this.charactersContentTsksCount--;
-          resolve();
-        }
+      } catch (err) {
+        reject(err);
       }
     });
   }
 
+  // Método que percorre a lista e retorna apenas o nome do recurso
   private getName(list, url) {
     return list.filter(item => {
       return item.url === url;
     })[0].name;
   }
 
+  // Métodos que retorna uma página de dados da SWAPI
   private async getPage(url, list) {
-    const page = await this.GetData(url);
-    for (let i = 0; i < page.results.length; i++) {
-      list.push(page.results[i]);
-
-      // última iteração
-      if ((page.results.length - 1) === i) {
-        // última página
-        if (page.next === null) {
-          this.charactersContentTsksCount--;
-          return;
+    try {
+      // obtém a página
+      const page = await this.GetData(url);
+      
+      // percorre os itens da página e os onser na lista principal
+      for (let i = 0; i < page.results.length; i++) {
+        list.push(page.results[i]);
+  
+        // última iteração
+        if ((page.results.length - 1) === i) {
+          // última página
+          if (page.next === null) {
+            return;
+          }
+  
+          // chama o método recursivamente para obter a próxima página
+          await this.getPage(page.next, list);
         }
-
-        await this.getPage(page.next, list);
       }
+    } catch (err) {
+      // loga o erro
+      console.log(err);
     }
   }
 
+  // Método que faz a chamada HTTP para a SWAPI
   private GetData(url: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.http.get(url).subscribe(data => {
-        resolve(data);
-      });
+      try {
+        this.http.get(url).subscribe(data => {
+          resolve(data);
+        });
+      } catch (err) {
+        reject(err);
+      }
     });
   }
 }

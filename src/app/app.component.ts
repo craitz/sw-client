@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { StarWarsService } from './services/star-wars/star-wars.service';
 
@@ -9,15 +9,9 @@ import { StarWarsService } from './services/star-wars/star-wars.service';
   providers: [StarWarsService]
 })
 
-export class AppComponent implements OnInit {
-  title = 'Star Wars Client';
-
+export class AppComponent {
   constructor(private router: Router, private swService: StarWarsService) {
-    //this.swService.init();
+    // a cada refresh ou rebuild, o aplicativo volta para a página inicial
     this.router.navigateByUrl('/');
-  }
-
-  ngOnInit() {
-    console.log('Entroou');
   }
 }
