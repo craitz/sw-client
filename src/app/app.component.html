@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col col-5">
             <div class="brand-content">
-                <!-- <a class="navbar-brand" href="#"> -->
+                <!-- <a class="navbar-brand" routerLink="/"> -->
                 <img width="100" alt="Star Wars Logo" src="../assets/images/star-wars.png">
                 <!-- </a> -->
             </div>
@@ -16,7 +16,4 @@
     </div>
 </div>
 
-<router-outlet *ngIf="!swService.loading"></router-outlet>
-<div *ngIf="swService.loading" class="loading-content">
-    <h2>Aguarge enquanto a aplicação está inicializando...</h2>
-</div>
+<router-outlet></router-outlet>

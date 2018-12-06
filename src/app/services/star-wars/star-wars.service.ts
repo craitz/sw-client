@@ -10,23 +10,38 @@ export class StarWarsService {
   public species: any = [];
   public films: any = [];
   public characters: any = [];
-  public loading: boolean = true;
-  public count: number = 4;
+  public loading: boolean = false;
+  public charactersContentTsksCount: number = 3;
 
   constructor(private http: HttpClient) { }
 
-  public async init() {
-    this.getPage('https://swapi.co/api/planets', this.planets);
-    this.getPage('https://swapi.co/api/species', this.species);
-    this.getPage('https://swapi.co/api/films', this.films);
-    this.getPage('https://swapi.co/api/people', this.characters);
+  public initCharactersContent() {
+    return new Promise((resolve, reject) => {
+      if (this.characters.length === 0) {
+        this.loading = true;
+        this.getPage('https://swapi.co/api/planets', this.planets);
+        this.getPage('https://swapi.co/api/species', this.species);
+        this.getPage('https://swapi.co/api/people', this.characters);
 
-    setInterval(() => {
-      if (this.count === 0) {
-        this.buildCharacteres();
-        this.loading = false;
+        setInterval(() => {
+          if (this.charactersContentTsksCount === 0) {
+            this.buildCharacteres();
+            this.loading = false;
+            resolve();
+          }
+        }, 100);
+      } else {
+        resolve();
       }
-    }, 50);
+    });
+  }
+
+  public async initStatisticsContent() {
+    if (this.films.length === 0) {
+      this.loading = true;
+      await this.getPage('https://swapi.co/api/films', this.films);
+      this.loading = false;
+    }
   }
 
   private buildCharacteres() {
@@ -40,14 +55,14 @@ export class StarWarsService {
 
         // última iteração
         if ((this.characters.length - 1) === i) {
-          this.count--;
+          this.charactersContentTsksCount--;
           resolve();
         }
       }
     });
   }
 
-  getName(list, url) {
+  private getName(list, url) {
     return list.filter(item => {
       return item.url === url;
     })[0].name;
@@ -62,7 +77,7 @@ export class StarWarsService {
       if ((page.results.length - 1) === i) {
         // última página
         if (page.next === null) {
-          this.count--;
+          this.charactersContentTsksCount--;
           return;
         }
 

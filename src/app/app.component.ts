@@ -1,6 +1,6 @@
-import { Component, Injectable } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { StarWarsService } from './services/star-wars/star-wars.service';
-
 
 @Component({
   selector: 'app-root',
@@ -9,10 +9,15 @@ import { StarWarsService } from './services/star-wars/star-wars.service';
   providers: [StarWarsService]
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Star Wars Client';
 
-  constructor(private swService: StarWarsService) {
-    this.swService.init();
+  constructor(private router: Router, private swService: StarWarsService) {
+    //this.swService.init();
+    this.router.navigateByUrl('/');
+  }
+
+  ngOnInit() {
+    console.log('Entroou');
   }
 }

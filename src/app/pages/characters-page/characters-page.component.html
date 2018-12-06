@@ -1,5 +1,5 @@
 <div class="characters-content">
-    <div *ngIf="characters !== null" class="table-responsive-lg">
+    <div *ngIf="!swService.loading" class="table-responsive-lg">
         <table class="table">
             <thead>
                 <tr>
@@ -22,5 +22,8 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+    <div *ngIf="swService.loading">
+        <h2 class="character-loading">Carregando dados...</h2>
     </div>
 </div>
