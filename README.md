@@ -2,9 +2,9 @@
 Aplicação Web para chamadas à API Star Wars (SWAPI)
 
 ## 1. Pré-requesitos
-#### [Node.JS](https://nodejs.org/)
-#### [Angular-Cli](https://angular.io)
-#### [Git](https://git-scm.com/downloads)
+* [Node.JS](https://nodejs.org/)
+* [Angular-Cli](https://angular.io)
+* [Git](https://git-scm.com/downloads)
 
 ## 2. Download
     git clone https://github.com/craitz/sw-client.git (HTTPS)
