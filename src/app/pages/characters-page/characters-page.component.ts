@@ -1,5 +1,4 @@
 import { Component, Injectable, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { CharacterList } from '../../models/characterList.model';
 import { StarWarsService } from '../../services/star-wars/star-wars.service';
 
@@ -13,7 +12,7 @@ import { StarWarsService } from '../../services/star-wars/star-wars.service';
 export class CharactersPageComponent implements OnInit {
   private characters: CharacterList = null;
 
-  constructor(private http: HttpClient, private swService: StarWarsService) { }
+  constructor(private swService: StarWarsService) { }
 
   ngOnInit() {
     this.getCharacters();

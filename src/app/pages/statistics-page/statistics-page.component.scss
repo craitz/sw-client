@@ -3,4 +3,13 @@
     height: 100%;
     display: flex;
     justify-content: center;
+    .card {
+        width: 300px !important;
+        .card-subtitle {
+            text-align: justify;
+        }
+        .film-info {
+            margin-top: 20px;
+        }
+    }
 }

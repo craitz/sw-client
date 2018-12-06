@@ -1,13 +1,17 @@
 <div class="statistics-content">
-    <div class="card" style="width: 18rem;">
+    <div *ngIf="!swService.loading" class="card" style="width: 18rem;">
         <div class="card-body">
-            <h5 class="card-title">Filmes da saga</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Número de participantes</h6>
-            <p class="card-t1ext">O objetivo deste card é verificar quantos personagens participaram em filme da saga, para que possamos descobrir qual foi a produção que envolveu o maior número de personagens até agora.</p>
             <div>
-                <h2>E o Vento Levou</h2>
-                <p>7 participantes</p>
+                <h5 class="card-title">Filmes da saga</h5>
+                <h6 class="card-subtitle mb-2 text-muted">O objetivo deste card é verificar quantos personagens participaram em cada filme da saga, para que possamos descobrir qual foi a produção que envolveu o maior número de personagens até agora.</h6>
+            </div>
+            <div class="film-info" *ngFor="let stat of swService.films">
+                <h5>{{stat.title}}</h5>
+                <h6 class="text-muted">{{stat.characters.length}} participantes</h6>
             </div>
         </div>
+    </div>
+    <div *ngIf="swService.loading">
+        <h2 class="character-loading">Carregando dados...</h2>
     </div>
 </div>
