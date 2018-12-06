@@ -104,7 +104,7 @@ export class StarWarsService {
       // obtém a página
       const page = await this.GetData(url);
       
-      // percorre os itens da página e os onser na lista principal
+      // percorre os itens da página e os insere na lista principal
       for (let i = 0; i < page.results.length; i++) {
         list.push(page.results[i]);
   
