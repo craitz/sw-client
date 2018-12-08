@@ -18,10 +18,17 @@ export class StatisticsPageComponent implements OnInit {
   }
 
   private async getStatistics() {
-    // chama o serviço para carregar os filmes
-    await this.swService.initStatisticsContent();
+    // se já carregaou os filmes da SWAPI, não precisa carregar de novo
+    if (this.statistics) {
+      return;
+    }
 
-    // atribui à variável da classe
-    this.statistics = this.swService.films;
+    setTimeout(() => {
+      // checa se o serviço em background já carregou os filmes
+      if (!this.swService.loadingFilms) {
+        // atribui à variável da classe
+        this.statistics = this.swService.films;
+      }
+    }, 50);
   }
 }

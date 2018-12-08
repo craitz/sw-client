@@ -1,5 +1,5 @@
 <div class="statistics-content">
-    <div *ngIf="!swService.loading" class="card" style="width: 18rem;">
+    <div *ngIf="!swService.loadingFilms" class="card" style="width: 18rem;">
         <img class="card-img-top" src="assets/images/card-movie.jpg" alt="Card image cap">
         <div class="card-body">
             <div>
@@ -12,7 +12,7 @@
             </div>
         </div>
     </div>
-    <div *ngIf="swService.loading">
+    <div *ngIf="swService.loadingFilms">
         <h2 class="character-loading">Carregando dados...</h2>
     </div>
 </div>

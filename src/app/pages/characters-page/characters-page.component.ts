@@ -20,10 +20,17 @@ export class CharactersPageComponent implements OnInit {
   }
 
   private async getCharacters() {
-    // chama o serviço para carregar os personagens
-    await this.swService.initCharactersContent();
+    // se já carregaou os personagems da SWAPI, não precisa carregar de novo
+    if (this.characters) {
+      return;
+    }
 
-    // atribui à variável da classe
-    this.characters = this.swService.characters;
+    setTimeout(() => {
+      // checa se o serviço em background já carregou os personagens
+      if (!this.swService.loadingFilms) {
+        // atribui à variável da classe
+        this.characters = this.swService.characters;
+      }
+    }, 50);
   }
 }

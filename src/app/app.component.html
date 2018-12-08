@@ -7,17 +7,17 @@
         </div>
         <div class="col col-7">
             <div class="btn-content">
-                <button class="btn btn-secondary btn-characters" routerLink="/" [disabled]="swService.loading">
+                <button class="btn btn-secondary btn-home" routerLink="/">
                     <span class="fas fa-home"></span>
                     <span class="btn-text d-none d-sm-inline-block">Home</span>
                 </button>
-                <button class="btn btn-secondary btn-characters" routerLink="/characters" [disabled]="swService.loading">
-                    <span class="fas fa-user"></span>
-                    <span class="btn-text d-none d-sm-inline-block">Personagens</span>
-                </button>
-                <button class="btn btn-secondary btn-statistics" routerLink="/statistics" [disabled]="swService.loading">
-                    <span class="fas fa-film"></span>
+                <button class="btn btn-secondary btn-statistics" routerLink="/statistics">
+                    <span class={{getStatisticsIcon()}}></span>
                     <span class="btn-text d-none d-sm-inline-block">Filmes</span>
+                </button>
+                <button class="btn btn-secondary btn-characters" routerLink="/characters">
+                    <span class={{getCharactersIcon()}}></span>
+                    <span class="btn-text d-none d-sm-inline-block">Personagens</span>
                 </button>
             </div>
         </div>
