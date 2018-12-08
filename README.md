@@ -11,6 +11,7 @@ Aplicação Web para chamadas à API Star Wars (SWAPI)
     git clone git@github.com:craitz/sw-client.git (SSH)
 
 ## 3. Execução
+    cd ./sw-client
     npm install
     ng serve --open
 
